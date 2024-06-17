@@ -1,0 +1,29 @@
+  GNU nano 7.2                                                                     update_dns_record.sh
+#!/bin/bash
+
+# Fetch the current IP address
+IP=$(curl -s ifconfig.me)
+
+# Define the data payload with the fetched IP address
+DATA=$(cat <<EOF
+{
+  "content": "$IP",
+  "name": "example.com",
+  "proxied": false,
+  "type": "A",
+  "comment": "Domain verification record",
+  "tags": [
+    "owner:dns-team"
+  ],
+  "ttl": 3600
+}
+EOF
+)
+
+# Execute the curl PUT request
+curl --request PUT \
+  --url https://api.cloudflare.com/client/v4/zones/ZONEID/dns_records/Record ID \
+  --header 'Content-Type: application/json' \
+  --header 'X-Auth-Email:email@gmail.com' \
+  --header 'Authorization: Bearer token' \
+  --data "$DATA"
