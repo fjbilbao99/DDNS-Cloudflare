@@ -1,5 +1,5 @@
 # DDNS-Cloudflare
-This is a simple DDNS script to update the IP on CCloudflar
+This is a simple DDNS script to update the IP on Cloudflare
 
 To obtain the ID for the record, 
 
